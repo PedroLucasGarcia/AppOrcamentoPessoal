@@ -8,12 +8,9 @@
 
     <!-- Font Awesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-
 	</head>
 
   <body>
-
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
       <div class="container">
         <a class="navbar-brand" href="#">
@@ -100,6 +97,24 @@
           <button type="button" class="btn btn-primary" onclick="cadastrarDespesa()">
             <i class="fas fa-plus"></i>
           </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal erro e sucesso-->
+    <div class="modal fade" id="modalRegistroDespesa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div id="modalTituloDiv">
+            <h5 class="modal-title" id="modalTitulo"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modalConteudo"></div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" id="modalBtn"></button>
+          </div>
         </div>
       </div>
     </div>

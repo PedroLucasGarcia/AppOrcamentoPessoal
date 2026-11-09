@@ -372,6 +372,58 @@ a {
     transform: translateX(2px);
 }
 
+/* Renda/disponível dentro do card de destaque */
+.card-destaque .destaque-texto {
+    color: inherit;
+    opacity: .85;
+}
+
+.card-destaque .btn-destaque {
+    background-color: var(--app-on-primary);
+    color: var(--app-primary);
+    border: 0;
+    font-weight: 600;
+    padding: .4rem .9rem;
+    border-radius: 999px;
+}
+
+.card-destaque .btn-destaque:hover,
+.card-destaque .btn-destaque:focus-visible {
+    background-color: color-mix(in srgb, var(--app-on-primary) 88%, var(--app-primary));
+    color: var(--app-primary);
+}
+
+.card-destaque .selo-disponivel {
+    font-size: 1.05rem;
+    font-weight: 800;
+    padding: .1rem .6rem;
+    border-radius: 999px;
+    background-color: color-mix(in srgb, var(--app-on-primary) 16%, transparent);
+    color: inherit;
+}
+
+.card-destaque .selo-disponivel.estourou {
+    background-color: #c92a2a;
+    color: #fff;
+}
+
+.card-destaque .progress-destaque {
+    height: .5rem;
+    background-color: color-mix(in srgb, var(--app-on-primary) 22%, transparent);
+}
+
+.card-destaque .progress-destaque .progress-bar {
+    background-color: var(--app-on-primary);
+}
+
+.card-destaque .progress-destaque .progress-bar.atencao {
+    background-color: #ffd43b;
+}
+
+.card-destaque .progress-destaque .progress-bar.estourou {
+    background-color: #c92a2a;
+}
+
 /* Faixa de indicadores (resumo) */
 .indicador {
     padding: 1.25rem 1.5rem;

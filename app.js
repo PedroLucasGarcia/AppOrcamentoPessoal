@@ -596,24 +596,24 @@ function renderizarResumoMesAtual() {
     if (!caixa) return
     const renda = rendaDoMes(ano, mes)
     if (!renda) {
-        caixa.innerHTML = `<p class="small mb-2">Informe quanto você ganha para saber quanto ainda pode gastar.</p>
-            <button type="button" class="btn btn-sm btn-outline-primary" data-abrir-config>
+        caixa.innerHTML = `<p class="small mb-2 destaque-texto">Informe quanto você ganha para saber quanto ainda pode gastar.</p>
+            <button type="button" class="btn btn-sm btn-destaque" data-abrir-config>
                 <i class="bi bi-wallet2"></i> Informar minha renda
             </button>`
         return
     }
     const disponivel = renda - total
     const pct = Math.min((total / renda) * 100, 100)
-    const cor = total > renda ? 'bg-danger' : pct >= 80 ? 'bg-warning' : 'bg-success'
+    const estado = total > renda ? 'estourou' : pct >= 80 ? 'atencao' : 'ok'
     caixa.innerHTML = `
         <div class="d-flex justify-content-between align-items-baseline gap-2 mb-1">
-            <span class="small">${disponivel >= 0 ? 'Disponível' : 'Acima da renda'}</span>
-            <strong class="${disponivel >= 0 ? 'text-success' : 'text-danger'}">${formatarMoeda(Math.abs(disponivel))}</strong>
+            <span class="small destaque-texto">${disponivel >= 0 ? 'Disponível' : 'Acima da renda'}</span>
+            <strong class="selo-disponivel ${estado}">${disponivel < 0 ? '−' : ''}${formatarMoeda(Math.abs(disponivel))}</strong>
         </div>
-        <div class="progress mb-1" role="progressbar" aria-label="Parte da renda já gasta" aria-valuenow="${Math.round(pct)}" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar ${cor}" style="width:${pct}%"></div>
+        <div class="progress progress-destaque mb-1" role="progressbar" aria-label="Parte da renda já gasta" aria-valuenow="${Math.round(pct)}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar ${estado}" style="width:${pct}%"></div>
         </div>
-        <small class="text-body-secondary">${Math.round((total / renda) * 100)}% de ${formatarMoeda(renda)} de renda</small>`
+        <small class="destaque-texto">${Math.round((total / renda) * 100)}% de ${formatarMoeda(renda)} de renda</small>`
 }
 
 function iconeCategoria(tipo) {

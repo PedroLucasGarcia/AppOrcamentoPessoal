@@ -695,8 +695,40 @@ function iniciarResumo() {
 // Inicialização: cada página chama a função correspondente
 // =====================================================================
 
+// =====================================================================
+// Tema claro / escuro
+// =====================================================================
+
+function atualizarBotaoTema() {
+    const botao = document.getElementById('btnTema')
+    if (!botao) return
+    const escuro = document.documentElement.getAttribute('data-bs-theme') === 'dark'
+    const texto = escuro ? 'Mudar para o tema claro' : 'Mudar para o tema escuro'
+    botao.querySelector('i').className = escuro ? 'bi bi-sun' : 'bi bi-moon-stars'
+    botao.setAttribute('aria-label', texto)
+    botao.title = texto
+}
+
+function iniciarTema() {
+    const botao = document.getElementById('btnTema')
+    if (!botao) return
+    atualizarBotaoTema()
+    botao.addEventListener('click', () => {
+        const novo = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark'
+        document.documentElement.setAttribute('data-bs-theme', novo)
+        try { localStorage.setItem('orcamento.tema', novo) } catch (e) { /* sem armazenamento */ }
+        botao.classList.remove('girando')
+        void botao.offsetWidth
+        botao.classList.add('girando')
+        atualizarBotaoTema()
+    })
+    // Se o tema do sistema mudar e não houver escolha salva, o ícone acompanha
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', atualizarBotaoTema)
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const pagina = document.body.dataset.pagina
+    iniciarTema()
     if (pagina === 'cadastro') iniciarCadastro()
     if (pagina === 'consulta') iniciarConsulta()
     if (pagina === 'resumo') iniciarResumo()

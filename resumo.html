@@ -11,7 +11,11 @@
     <script>
         (function () {
             var mq = matchMedia('(prefers-color-scheme: dark)');
-            function aplicar() { document.documentElement.setAttribute('data-bs-theme', mq.matches ? 'dark' : 'light'); }
+            function salvo() { try { return localStorage.getItem('orcamento.tema'); } catch (e) { return null; } }
+            function aplicar() {
+                var tema = salvo() || (mq.matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-bs-theme', tema);
+            }
             aplicar();
             mq.addEventListener('change', aplicar);
         })();
@@ -33,6 +37,10 @@
                 <img src="logo.svg" width="32" height="32" alt="">
                 Orçamento Pessoal
             </a>
+            <button type="button" class="btn-tema order-md-last ms-auto me-1 ms-md-2 me-md-0" id="btnTema"
+                aria-label="Mudar para o tema escuro" title="Mudar para o tema escuro">
+                <i class="bi bi-moon-stars" aria-hidden="true"></i>
+            </button>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
                 aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
                 <span class="hamburguer" aria-hidden="true"><span></span><span></span><span></span></span>

@@ -163,11 +163,7 @@ a {
 }
 
 .app-nav .navbar-brand img {
-    object-fit: contain;
-}
-
-[data-bs-theme="light"] .app-nav .navbar-brand img {
-    filter: brightness(0) saturate(100%) invert(27%) sepia(52%) saturate(640%) hue-rotate(130deg);
+    border-radius: 8px;
 }
 
 .app-nav .nav-link {

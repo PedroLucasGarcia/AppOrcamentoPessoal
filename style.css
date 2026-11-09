@@ -1,3 +1,636 @@
-body{
-    background-color: aliceblue;
+/* =====================================================================
+   Orçamento Pessoal: tema visual
+   Sobrescreve as variáveis do Bootstrap 5.3 com uma paleta própria
+   (verde-petróleo sobre neutros frios), com modo claro e escuro.
+   ===================================================================== */
+
+:root,
+[data-bs-theme="light"] {
+    --app-bg: #f3f5f4;
+    --app-surface: #ffffff;
+    --app-ink: #16211f;
+    --app-muted: #5a6662;
+    --app-border: #e0e6e3;
+    --app-primary: #0d6b63;
+    --app-primary-hover: #0a5751;
+    --app-primary-rgb: 13, 107, 99;
+    --app-on-primary: #ffffff;
+    --app-primary-soft: #e3f1ef;
+    --app-success: #1d7a48;
+    --app-success-rgb: 29, 122, 72;
+    --app-danger: #c0362e;
+    --app-danger-rgb: 192, 54, 46;
+    --app-warning: #c98200;
+    --app-warning-rgb: 201, 130, 0;
+    --app-shadow: 0 1px 2px rgba(18, 33, 30, .05), 0 6px 20px -8px rgba(18, 33, 30, .10);
+    --app-shadow-hover: 0 2px 4px rgba(18, 33, 30, .06), 0 12px 28px -10px rgba(18, 33, 30, .16);
+
+    --bs-body-bg: var(--app-surface);
+    --bs-body-bg-rgb: 255, 255, 255;
+    --bs-secondary-bg: #eef2f0;
+    --bs-tertiary-bg: #f6f8f7;
+    --bs-tertiary-bg-rgb: 246, 248, 247;
+}
+
+[data-bs-theme="dark"] {
+    --app-bg: #0e1413;
+    --app-surface: #161e1d;
+    --app-ink: #e4ebe9;
+    --app-muted: #9aa7a3;
+    --app-border: #263130;
+    --app-primary: #4cbcae;
+    --app-primary-hover: #6fcbbf;
+    --app-primary-rgb: 76, 188, 174;
+    --app-on-primary: #05201c;
+    --app-primary-soft: #183230;
+    --app-success: #4fbf83;
+    --app-success-rgb: 79, 191, 131;
+    --app-danger: #f0776e;
+    --app-danger-rgb: 240, 119, 110;
+    --app-warning: #e8b04a;
+    --app-warning-rgb: 232, 176, 74;
+    --app-shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -10px rgba(0, 0, 0, .5);
+    --app-shadow-hover: 0 2px 4px rgba(0, 0, 0, .35), 0 14px 30px -10px rgba(0, 0, 0, .6);
+
+    --bs-body-bg: var(--app-surface);
+    --bs-body-bg-rgb: 22, 30, 29;
+    --bs-secondary-bg: #1f2928;
+    --bs-tertiary-bg: #1b2423;
+    --bs-tertiary-bg-rgb: 27, 36, 35;
+}
+
+:root,
+[data-bs-theme] {
+    --bs-body-font-family: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --bs-body-color: var(--app-ink);
+    --bs-emphasis-color: var(--app-ink);
+    --bs-heading-color: var(--app-ink);
+    --bs-secondary-color: var(--app-muted);
+    --bs-border-color: var(--app-border);
+    --bs-border-radius: .625rem;
+    --bs-border-radius-sm: .5rem;
+    --bs-border-radius-lg: .875rem;
+
+    --bs-primary: var(--app-primary);
+    --bs-primary-rgb: var(--app-primary-rgb);
+    --bs-success: var(--app-success);
+    --bs-success-rgb: var(--app-success-rgb);
+    --bs-danger: var(--app-danger);
+    --bs-danger-rgb: var(--app-danger-rgb);
+    --bs-warning: var(--app-warning);
+    --bs-warning-rgb: var(--app-warning-rgb);
+    --bs-success-text-emphasis: var(--app-success);
+    --bs-danger-text-emphasis: var(--app-danger);
+
+    --bs-link-color: var(--app-primary);
+    --bs-link-color-rgb: var(--app-primary-rgb);
+    --bs-link-hover-color: var(--app-primary-hover);
+    --bs-link-hover-color-rgb: var(--app-primary-rgb);
+
+    --bs-focus-ring-color: rgba(var(--app-primary-rgb), .3);
+    --bs-form-invalid-color: var(--app-danger);
+    --bs-form-invalid-border-color: var(--app-danger);
+}
+
+/* ---------------------------------------------------------------------
+   Base
+   --------------------------------------------------------------------- */
+
+html {
+    color-scheme: light;
+}
+
+[data-bs-theme="dark"] {
+    color-scheme: dark;
+}
+
+body {
+    background-color: var(--app-bg);
+    color: var(--app-ink);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+
+h1, .h1, h2, .h2, .h4 {
+    font-weight: 700;
+    letter-spacing: -.02em;
+}
+
+::selection {
+    background-color: rgba(var(--app-primary-rgb), .22);
+    color: inherit;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--app-muted) 45%, transparent) transparent;
+}
+
+a {
+    text-underline-offset: .2em;
+}
+
+.text-body-secondary {
+    color: var(--app-muted) !important;
+}
+
+.min-w-0 {
+    min-width: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Barra de navegação
+   --------------------------------------------------------------------- */
+
+.app-nav {
+    background-color: color-mix(in srgb, var(--app-surface) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--app-border);
+    padding-block: .625rem;
+    --bs-navbar-color: var(--app-muted);
+    --bs-navbar-hover-color: var(--app-ink);
+    --bs-navbar-active-color: var(--app-primary);
+    --bs-navbar-brand-color: var(--app-ink);
+    --bs-navbar-brand-hover-color: var(--app-ink);
+    --bs-navbar-toggler-border-color: var(--app-border);
+}
+
+.app-nav .navbar-brand {
+    font-weight: 800;
+    font-size: 1.0625rem;
+    letter-spacing: -.02em;
+}
+
+.app-nav .navbar-brand img {
+    object-fit: contain;
+}
+
+[data-bs-theme="light"] .app-nav .navbar-brand img {
+    filter: brightness(0) saturate(100%) invert(27%) sepia(52%) saturate(640%) hue-rotate(130deg);
+}
+
+.app-nav .nav-link {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    font-weight: 600;
+    font-size: .9375rem;
+    border-radius: 999px;
+    padding: .45rem .9rem !important;
+    transition: color .15s ease, background-color .15s ease;
+}
+
+.app-nav .nav-link:hover {
+    background-color: var(--bs-tertiary-bg);
+}
+
+.app-nav .nav-link.active {
+    background-color: var(--app-primary-soft);
+}
+
+.app-nav .navbar-nav {
+    gap: .25rem;
+}
+
+@media (max-width: 767.98px) {
+    .app-nav .navbar-nav {
+        padding-top: .75rem;
+    }
+}
+
+/* ---------------------------------------------------------------------
+   Cabeçalho de página
+   --------------------------------------------------------------------- */
+
+.pagina-titulo {
+    font-size: 1.625rem;
+    margin-bottom: .25rem;
+}
+
+.pagina-sub {
+    color: var(--app-muted);
+    margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Cards
+   --------------------------------------------------------------------- */
+
+.card {
+    --bs-card-border-color: var(--app-border);
+    --bs-card-border-radius: 1rem;
+    --bs-card-inner-border-radius: calc(1rem - 1px);
+    --bs-card-cap-bg: transparent;
+    --bs-card-cap-padding-y: .875rem;
+    --bs-card-cap-padding-x: 1.25rem;
+    --bs-card-spacer-x: 1.25rem;
+    --bs-card-bg: var(--app-surface);
+    box-shadow: var(--app-shadow);
+}
+
+.card-header {
+    border-bottom-color: var(--app-border);
+}
+
+.card-titulo {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -.01em;
+    margin: 0;
+}
+
+/* Card de destaque (gasto do mês na página de cadastro) */
+.card-destaque {
+    --bs-card-bg: var(--app-primary);
+    --bs-card-border-color: var(--app-primary);
+    color: var(--app-on-primary);
+}
+
+.card-destaque .rotulo {
+    opacity: .82;
+    font-size: .875rem;
+    font-weight: 500;
+}
+
+.card-destaque .valor-destaque {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.15;
+}
+
+.card-destaque a {
+    color: inherit;
+    font-weight: 600;
+    font-size: .875rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .75rem;
+    margin-left: -.75rem;
+    border-radius: 999px;
+    transition: background-color .15s ease;
+}
+
+.card-destaque a:hover {
+    background-color: color-mix(in srgb, var(--app-on-primary) 14%, transparent);
+}
+
+.card-destaque a .bi {
+    transition: transform .15s ease;
+}
+
+.card-destaque a:hover .bi {
+    transform: translateX(2px);
+}
+
+/* Faixa de indicadores (resumo) */
+.indicador {
+    padding: 1.25rem 1.5rem;
+}
+
+.indicador .rotulo {
+    color: var(--app-muted);
+    font-size: .875rem;
+    font-weight: 600;
+}
+
+.indicador .numero {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.25;
+    margin: .25rem 0 .2rem;
+}
+
+@media (min-width: 768px) {
+    .indicador + .indicador {
+        border-left: 1px solid var(--app-border);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .indicador + .indicador {
+        border-top: 1px solid var(--app-border);
+    }
+}
+
+/* ---------------------------------------------------------------------
+   Formulários
+   --------------------------------------------------------------------- */
+
+.form-label {
+    font-weight: 600;
+    font-size: .875rem;
+    margin-bottom: .4rem;
+}
+
+.form-control,
+.form-select {
+    border-color: var(--app-border);
+    padding-block: .55rem;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.form-control-sm,
+.input-group-sm > .form-control {
+    padding-block: .3rem;
+}
+
+.form-control:hover,
+.form-select:hover {
+    border-color: color-mix(in srgb, var(--app-muted) 45%, var(--app-border));
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--app-primary);
+    box-shadow: 0 0 0 .2rem rgba(var(--app-primary-rgb), .18);
+}
+
+.form-control::placeholder {
+    color: color-mix(in srgb, var(--app-muted) 75%, transparent);
+}
+
+.input-group-text {
+    background-color: var(--bs-tertiary-bg);
+    border-color: var(--app-border);
+    color: var(--app-muted);
+    font-weight: 600;
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+    box-shadow: 0 0 0 .2rem rgba(var(--app-danger-rgb), .18);
+}
+
+/* ---------------------------------------------------------------------
+   Botões
+   --------------------------------------------------------------------- */
+
+.btn {
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--app-primary);
+    --bs-btn-border-color: var(--app-primary);
+    --bs-btn-color: var(--app-on-primary);
+    --bs-btn-hover-bg: var(--app-primary-hover);
+    --bs-btn-hover-border-color: var(--app-primary-hover);
+    --bs-btn-hover-color: var(--app-on-primary);
+    --bs-btn-active-bg: var(--app-primary-hover);
+    --bs-btn-active-border-color: var(--app-primary-hover);
+    --bs-btn-active-color: var(--app-on-primary);
+    --bs-btn-disabled-bg: var(--app-primary);
+    --bs-btn-disabled-border-color: var(--app-primary);
+    --bs-btn-disabled-color: var(--app-on-primary);
+    --bs-btn-focus-shadow-rgb: var(--app-primary-rgb);
+    box-shadow: 0 1px 2px rgba(var(--app-primary-rgb), .25);
+}
+
+.btn-outline-secondary,
+.btn-suave {
+    --bs-btn-color: var(--app-ink);
+    --bs-btn-bg: var(--app-surface);
+    --bs-btn-border-color: var(--app-border);
+    --bs-btn-hover-color: var(--app-ink);
+    --bs-btn-hover-bg: var(--bs-tertiary-bg);
+    --bs-btn-hover-border-color: color-mix(in srgb, var(--app-muted) 40%, var(--app-border));
+    --bs-btn-active-color: var(--app-ink);
+    --bs-btn-active-bg: var(--bs-secondary-bg);
+    --bs-btn-active-border-color: var(--app-border);
+    --bs-btn-disabled-color: var(--app-muted);
+    --bs-btn-disabled-bg: var(--app-surface);
+    --bs-btn-disabled-border-color: var(--app-border);
+    --bs-btn-focus-shadow-rgb: var(--app-primary-rgb);
+}
+
+.btn-danger {
+    --bs-btn-bg: var(--app-danger);
+    --bs-btn-border-color: var(--app-danger);
+    --bs-btn-color: #fff;
+    --bs-btn-hover-bg: color-mix(in srgb, var(--app-danger) 85%, #000);
+    --bs-btn-hover-border-color: color-mix(in srgb, var(--app-danger) 85%, #000);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-active-bg: color-mix(in srgb, var(--app-danger) 80%, #000);
+    --bs-btn-active-border-color: color-mix(in srgb, var(--app-danger) 80%, #000);
+    --bs-btn-focus-shadow-rgb: var(--app-danger-rgb);
+}
+
+[data-bs-theme="dark"] .btn-danger {
+    --bs-btn-color: #2a0a07;
+    --bs-btn-hover-color: #2a0a07;
+    --bs-btn-active-color: #2a0a07;
+    --bs-btn-hover-bg: color-mix(in srgb, var(--app-danger) 85%, #fff);
+    --bs-btn-hover-border-color: color-mix(in srgb, var(--app-danger) 85%, #fff);
+}
+
+/* Botões só com ícone (ações das linhas) */
+.btn-icone {
+    --bs-btn-padding-x: 0;
+    --bs-btn-padding-y: 0;
+    --bs-btn-color: var(--app-muted);
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-color: var(--app-ink);
+    --bs-btn-hover-bg: var(--bs-secondary-bg);
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-bg: var(--bs-secondary-bg);
+    --bs-btn-active-border-color: transparent;
+    --bs-btn-focus-shadow-rgb: var(--app-primary-rgb);
+    width: 2rem;
+    height: 2rem;
+    border-radius: .5rem;
+}
+
+.btn-icone.perigo {
+    --bs-btn-hover-color: var(--app-danger);
+    --bs-btn-hover-bg: rgba(var(--app-danger-rgb), .1);
+    --bs-btn-active-bg: rgba(var(--app-danger-rgb), .16);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--app-primary);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+/* ---------------------------------------------------------------------
+   Tabelas e listas
+   --------------------------------------------------------------------- */
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--app-ink);
+    --bs-table-border-color: var(--app-border);
+    --bs-table-hover-bg: var(--bs-tertiary-bg);
+    --bs-table-hover-color: var(--app-ink);
+    margin-bottom: 0;
+}
+
+.table > :not(caption) > * > * {
+    padding: .8rem 1rem;
+}
+
+.table > :not(caption) > * > *:first-child {
+    padding-left: 1.25rem;
+}
+
+.table > :not(caption) > * > *:last-child {
+    padding-right: 1.25rem;
+}
+
+.table thead th {
+    font-size: .8125rem;
+    font-weight: 600;
+    color: var(--app-muted);
+    background-color: var(--bs-tertiary-bg);
+    white-space: nowrap;
+}
+
+.table tbody tr:last-child > * {
+    border-bottom: 0;
+}
+
+.valor-celula {
+    font-weight: 700;
+}
+
+td.descricao {
+    min-width: 12rem;
+    word-break: break-word;
+}
+
+.coluna-barra {
+    min-width: 11rem;
+}
+
+.limite {
+    min-width: 9rem;
+    max-width: 12rem;
+    margin-left: auto;
+}
+
+.list-group {
+    --bs-list-group-bg: transparent;
+    --bs-list-group-border-color: var(--app-border);
+    --bs-list-group-item-padding-x: 1.25rem;
+    --bs-list-group-item-padding-y: .8rem;
+}
+
+.lista-item-valor {
+    font-weight: 700;
+}
+
+/* Estado vazio */
+.estado-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    text-align: center;
+    color: var(--app-muted);
+    padding: 2.5rem 1.25rem;
+}
+
+.estado-vazio .bi {
+    font-size: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--bs-secondary-bg);
+    color: var(--app-muted);
+}
+
+.estado-vazio a {
+    font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------
+   Ícone de categoria
+   --------------------------------------------------------------------- */
+
+.icone-categoria {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    border-radius: .625rem;
+    color: var(--cor);
+    background-color: color-mix(in srgb, var(--cor) 12%, transparent);
+    font-size: 1rem;
+}
+
+[data-bs-theme="dark"] .icone-categoria {
+    color: color-mix(in srgb, var(--cor) 55%, #fff);
+    background-color: color-mix(in srgb, var(--cor) 24%, transparent);
+}
+
+/* ---------------------------------------------------------------------
+   Barras de progresso
+   --------------------------------------------------------------------- */
+
+.progress {
+    --bs-progress-height: .5rem;
+    --bs-progress-bg: var(--bs-secondary-bg);
+    --bs-progress-bar-bg: var(--app-primary);
+    --bs-progress-border-radius: 999px;
+    margin-bottom: .3rem;
+}
+
+.progress-bar {
+    border-radius: 999px;
+    transition: width .5s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* ---------------------------------------------------------------------
+   Modais e notificações
+   --------------------------------------------------------------------- */
+
+.modal {
+    --bs-modal-bg: var(--app-surface);
+    --bs-modal-border-color: var(--app-border);
+    --bs-modal-border-radius: 1rem;
+    --bs-modal-inner-border-radius: calc(1rem - 1px);
+    --bs-modal-header-border-color: var(--app-border);
+    --bs-modal-footer-border-color: var(--app-border);
+    --bs-modal-box-shadow: 0 24px 60px -20px rgba(0, 0, 0, .35);
+}
+
+.modal-title {
+    font-weight: 700;
+    letter-spacing: -.01em;
+}
+
+.toast-container {
+    z-index: 1090;
+}
+
+.toast {
+    --bs-toast-border-radius: .75rem;
+    --bs-toast-box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .35);
+    font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
 }

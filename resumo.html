@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Orçamento Pessoal · Resumo</title>
+
+    <meta name="color-scheme" content="light dark">
+    <script>
+        (function () {
+            var mq = matchMedia('(prefers-color-scheme: dark)');
+            function aplicar() { document.documentElement.setAttribute('data-bs-theme', mq.matches ? 'dark' : 'light'); }
+            aplicar();
+            mq.addEventListener('change', aplicar);
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-pagina="resumo">
+
+    <nav class="navbar navbar-expand-md app-nav sticky-top mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="logo.png" width="32" height="32" alt="">
+                Orçamento Pessoal
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+                aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-plus-circle"></i> Cadastro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="consulta.html"><i class="bi bi-search"></i> Consulta</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="resumo.html"><i class="bi bi-pie-chart"></i> Resumo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container pb-5">
+        <div class="d-flex flex-wrap gap-3 justify-content-between align-items-end mb-4">
+            <div>
+                <h1 class="pagina-titulo">Resumo mensal</h1>
+                <p class="pagina-sub">Quanto você gastou e quanto ainda cabe no orçamento.</p>
+            </div>
+            <div class="d-flex gap-2">
+                <div>
+                    <label for="resumoMes" class="form-label small mb-1">Mês</label>
+                    <select class="form-select" id="resumoMes"></select>
+                </div>
+                <div>
+                    <label for="resumoAno" class="form-label small mb-1">Ano</label>
+                    <select class="form-select" id="resumoAno"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="row g-0">
+                <div class="col-md-4 indicador">
+                    <div class="rotulo">Total gasto</div>
+                    <div class="numero" id="cardGasto">R$ 0,00</div>
+                    <div class="small text-body-secondary" id="cardQtd"></div>
+                    <div id="cardComparacao"></div>
+                </div>
+                <div class="col-md-4 indicador">
+                    <div class="rotulo">Orçamento do mês</div>
+                    <div class="numero" id="cardOrcamento">—</div>
+                    <div class="small text-body-secondary">soma dos limites por categoria</div>
+                </div>
+                <div class="col-md-4 indicador">
+                    <div class="rotulo">Saldo</div>
+                    <div class="numero" id="cardSaldo">—</div>
+                    <div class="small text-body-secondary" id="cardSaldoInfo"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header d-flex flex-wrap gap-2 justify-content-between align-items-center">
+                <h2 class="card-titulo">Gastos por categoria</h2>
+                <button type="button" class="btn btn-sm btn-primary" id="btnSalvarLimites">
+                    <i class="bi bi-save"></i> Salvar limites
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Categoria</th>
+                            <th scope="col" class="text-end">Gasto</th>
+                            <th scope="col">Uso</th>
+                            <th scope="col">Limite mensal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaCategorias"></tbody>
+                </table>
+            </div>
+            <div class="card-footer small text-body-secondary">
+                Os limites valem para todos os meses. Deixe em branco para não definir limite.
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

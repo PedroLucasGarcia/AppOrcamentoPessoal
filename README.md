@@ -1,21 +1,22 @@
-# AppOrcamentoPessoal
+# Orçamento Pessoal
 
-Aplicativo web simples para controle de despesas pessoais. Funciona direto no navegador, sem servidor nem banco de dados: os dados ficam salvos no `localStorage`.
+Aplicativo web para organizar o dinheiro do dia a dia. Você registra os seus gastos, informa quanto ganha e acompanha quanto ainda pode gastar no mês. Os dados ficam salvos no próprio navegador.
 
-## Funcionalidades
+## O que o app faz
 
-- **Cadastro** (`index.html`): registra despesas com data, categoria, descrição e valor (aceita `1.234,56` ou `1234.56`), com validação dos campos. Mostra o total gasto no mês atual e os últimos lançamentos.
-- **Consulta** (`consulta.html`): filtra por ano, mês, dia, categoria, faixa de valor e trecho da descrição (sem diferenciar maiúsculas ou acentos). Mostra o total filtrado, permite editar e excluir lançamentos e exportar o resultado para CSV (abre no Excel).
-- **Resumo** (`resumo.html`): total gasto no mês, comparação com o mês anterior, gastos por categoria e limites de orçamento mensais com barra de progresso.
+- **Registro de despesas:** cada gasto tem data, categoria, descrição e valor. Despesas que se repetem todo mês, como aluguel ou assinaturas, podem ser marcadas como fixas e são lançadas automaticamente.
+- **Renda e saldo disponível:** você informa o seu salário e o app mostra quanto já gastou e quanto ainda sobra no mês. Também dá para registrar entradas extras, como um trabalho avulso ou um presente.
+- **Meta de economia:** você define quanto quer guardar por mês e o app avisa quando os gastos colocam essa meta em risco.
+- **Limites por categoria:** cada categoria pode ter um limite mensal, com uma barra que mostra quanto dele já foi usado.
+- **Alertas:** avisos quando você passa da renda, se aproxima de um limite ou compromete a meta.
+- **Consulta:** busca de despesas por data, categoria, valor ou descrição, com opção de editar, excluir e exportar para planilha (CSV).
+- **Resumo mensal:** total do mês, comparação com o mês anterior, gastos por categoria e um gráfico dos últimos 6 meses.
+- **Várias moedas:** real, dólar, euro, libra, iene, peso e outras.
+- **Backup:** permite baixar uma cópia dos dados e restaurá-la depois.
+- **Tema claro e escuro.**
 
 Categorias: Alimentação, Educação, Lazer, Saúde, Transporte, Moradia e Outros.
 
-## Como usar
-
-Abra o `index.html` no navegador, ou sirva a pasta com a extensão Live Server do VS Code.
-
-Despesas salvas pela versão anterior do app são migradas automaticamente para o novo formato na primeira vez que a página é aberta.
-
 ## Tecnologias
 
-HTML, CSS, JavaScript puro, Bootstrap 5 e Bootstrap Icons.
+HTML, CSS e JavaScript puro, com Bootstrap 5 e Bootstrap Icons.

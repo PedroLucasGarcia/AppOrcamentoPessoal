@@ -37,7 +37,11 @@
                 <img src="logo.svg" width="32" height="32" alt="">
                 Orçamento Pessoal
             </a>
-            <button type="button" class="btn-tema order-md-last ms-auto me-1 ms-md-2 me-md-0" id="btnTema"
+            <button type="button" class="btn-tema order-md-last ms-auto me-1 ms-md-2 me-md-0" id="btnConfig" data-abrir-config
+                aria-label="Configurações" title="Configurações">
+                <i class="bi bi-gear" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn-tema order-md-last me-1 ms-md-1 me-md-0" id="btnTema"
                 aria-label="Mudar para o tema escuro" title="Mudar para o tema escuro">
                 <i class="bi bi-moon-stars" aria-hidden="true"></i>
             </button>
@@ -84,15 +88,19 @@
                                 <div class="col-sm-4">
                                     <label for="valor" class="form-label">Valor</label>
                                     <div class="input-group has-validation">
-                                        <span class="input-group-text">R$</span>
+                                        <span class="input-group-text simbolo-moeda"></span>
                                         <input type="text" inputmode="decimal" class="form-control text-end" id="valor"
-                                            placeholder="0,00" autocomplete="off" required>
+                                            data-placeholder-valor autocomplete="off" required>
                                         <div class="invalid-feedback" id="valorErro"></div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-end mt-4">
+                            <div class="d-flex justify-content-between flex-wrap gap-3 align-items-center mt-4">
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input" type="checkbox" id="fixa">
+                                    <label class="form-check-label" for="fixa">Repetir todo mês (despesa fixa)</label>
+                                </div>
                                 <button type="submit" class="btn btn-primary px-4">
                                     <i class="bi bi-plus-lg"></i> Adicionar despesa
                                 </button>
@@ -106,7 +114,8 @@
                 <div class="card card-destaque mb-4">
                     <div class="card-body p-4">
                         <div class="rotulo">Gasto em <span id="nomeMesAtual"></span></div>
-                        <div class="valor-destaque mb-2" id="totalMesAtual">R$ 0,00</div>
+                        <div class="valor-destaque mb-2" id="totalMesAtual"></div>
+                        <div id="disponivelMesAtual" class="mb-3"></div>
                         <a href="resumo.html">Ver resumo do mês <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>

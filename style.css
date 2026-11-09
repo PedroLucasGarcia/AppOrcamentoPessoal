@@ -391,15 +391,143 @@ a {
     margin: .25rem 0 .2rem;
 }
 
-@media (min-width: 768px) {
-    .indicador + .indicador {
-        border-left: 1px solid var(--app-border);
+.indicador .numero {
+    overflow-wrap: anywhere;
+}
+
+/* 2 colunas no celular, 4 no desktop */
+.indicador:nth-child(even) {
+    border-left: 1px solid var(--app-border);
+}
+
+.indicador:nth-child(n+3) {
+    border-top: 1px solid var(--app-border);
+}
+
+@media (max-width: 575.98px) {
+    .indicador {
+        padding: 1rem;
+    }
+
+    .indicador .numero {
+        font-size: 1.3rem;
     }
 }
 
-@media (max-width: 767.98px) {
+@media (min-width: 992px) {
     .indicador + .indicador {
-        border-top: 1px solid var(--app-border);
+        border-left: 1px solid var(--app-border);
+    }
+
+    .indicador:nth-child(n+3) {
+        border-top: 0;
+    }
+}
+
+/* Barra de renda gasta, com marca da meta */
+.bloco-renda {
+    border-top: 1px solid var(--app-border);
+    padding: 1rem 1.5rem 1.25rem;
+}
+
+.barra-renda {
+    position: relative;
+}
+
+.barra-renda .progress {
+    height: .65rem;
+}
+
+.marca-meta {
+    position: absolute;
+    top: -.3rem;
+    bottom: -.3rem;
+    width: 2px;
+    margin-left: -1px;
+    background: var(--app-ink);
+    border-radius: 1px;
+}
+
+.legenda-meta {
+    color: var(--app-muted);
+}
+
+/* Gráfico dos últimos 6 meses */
+.grafico {
+    display: flex;
+    align-items: stretch;
+    gap: .75rem;
+    height: 190px;
+}
+
+.grafico-mes {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.grafico-barras {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    border-bottom: 1px solid var(--app-border);
+}
+
+.grafico .barra {
+    width: min(22px, 40%);
+    min-height: 2px;
+    border-radius: 4px 4px 0 0;
+    transition: height .4s ease;
+}
+
+.grafico .barra.renda,
+.grafico-legenda .ponto.renda {
+    background: var(--app-primary-soft);
+    box-shadow: inset 0 0 0 1px rgba(var(--app-primary-rgb), .35);
+}
+
+.grafico .barra.gasto,
+.grafico-legenda .ponto.gasto {
+    background: var(--app-primary);
+}
+
+.grafico .barra.estourou {
+    background: var(--app-danger);
+}
+
+.grafico-rotulo {
+    text-align: center;
+    font-size: .8rem;
+    color: var(--app-muted);
+    padding-top: .4rem;
+}
+
+.grafico-mes.atual .grafico-rotulo {
+    color: var(--app-ink);
+    font-weight: 700;
+}
+
+.grafico-legenda {
+    display: flex;
+    gap: 1rem;
+    color: var(--app-muted);
+}
+
+.grafico-legenda .ponto {
+    display: inline-block;
+    width: .7rem;
+    height: .7rem;
+    border-radius: 3px;
+    vertical-align: -1px;
+    margin-right: .2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .grafico .barra {
+        transition: none;
     }
 }
 
